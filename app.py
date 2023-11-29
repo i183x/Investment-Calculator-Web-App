@@ -29,23 +29,15 @@ def result():
     return render_template('result.html', result={'result': result, 'profit': profit, 'years': investment_years})
 
 if __name__ == '__main__':
-    import os
-    from werkzeug.serving import run_simple
+    monkey.patch_all()
 
-    if os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
-        # Run only once, not in reloader
-        monkey.patch_all()
+    class FlaskApplication(Application):
+        def init(self, parser, opts, args):
+            return {
+                'bind': f'0.0.0.0:{os.environ.get("PORT", 5000)}',
+            }
 
-        class FlaskApplication(Application):
-            def init(self, parser, opts, args):
-                return {
-                    'bind': f'0.0.0.0:{os.environ.get("PORT", 5000)}',
-                }
+        def load(self):
+            return app
 
-            def load(self):
-                return app
-
-        run_simple('0.0.0.0', int(os.environ.get('PORT', 5000)), app, use_reloader=False)
-
-    else:
-        print("Don't run with the reloader in production.")
+    FlaskApplication().run()
