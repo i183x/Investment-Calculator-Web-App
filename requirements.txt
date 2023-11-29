@@ -1,4 +1,4 @@
+python_version==3.8
 Flask==2.0.0
-gevent==23.9.1
+gevent==22.8.0
 gunicorn==21.2.0
-python_version==3.12.0
