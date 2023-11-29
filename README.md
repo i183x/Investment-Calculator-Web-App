@@ -48,8 +48,10 @@ Visit [http://localhost:5000](http://localhost:5000) in your web browser to acce
 
 ## Dependencies
 
-- Flask 3.0.0
+- Flask 2.0.0
 - python-dateutil 2.8.2
+- gevent 22.8.0
+- gunicorn 21.2.0
 
 ## Contributing
 
