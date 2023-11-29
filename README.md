@@ -27,7 +27,7 @@ pip install -r requirements.txt
 Execute the following command to run the Flask web application:
 
 ```bash
-python app.py
+python3 app.py
 ```
 
 Visit [http://localhost:5000](http://localhost:5000) in your web browser to access the Investment Calculator.
