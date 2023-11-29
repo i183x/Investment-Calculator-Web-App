@@ -38,6 +38,9 @@ Visit [http://localhost:5000](http://localhost:5000) in your web browser to acce
 
 2. Click the "Calculate" button to see the calculated net amount and total profit after the specified investment duration.
 
+Explore the [live demo](https://sip-cagr-calculator.onrender.com) for a hands-on experience.
+(Currently depricated due to $charges.)
+
 ## File Structure
 
 - **app.py:** The main Python script containing the Flask application and investment calculation logic.
