@@ -1,4 +1,7 @@
 from flask import Flask, render_template, request
+from gevent import monkey
+from gunicorn.app.base import Application
+
 import os
 
 app = Flask(__name__)
@@ -26,4 +29,23 @@ def result():
     return render_template('result.html', result={'result': result, 'profit': profit, 'years': investment_years})
 
 if __name__ == '__main__':
-    app.run(port=int(os.environ.get('PORT', 5000)), debug=False)
+    import os
+    from werkzeug.serving import run_simple
+
+    if os.environ.get('WERKZEUG_RUN_MAIN') == 'true':
+        # Run only once, not in reloader
+        monkey.patch_all()
+
+        class FlaskApplication(Application):
+            def init(self, parser, opts, args):
+                return {
+                    'bind': f'0.0.0.0:{os.environ.get("PORT", 5000)}',
+                }
+
+            def load(self):
+                return app
+
+        run_simple('0.0.0.0', int(os.environ.get('PORT', 5000)), app, use_reloader=False)
+
+    else:
+        print("Don't run with the reloader in production.")
