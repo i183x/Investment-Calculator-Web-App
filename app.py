@@ -26,4 +26,4 @@ def result():
     return render_template('result.html', result={'result': result, 'profit': profit, 'years': investment_years})
 
 if __name__ == '__main__':
-    app.run(port=int(os.environ.get('PORT', 5000)), debug=True)
+    app.run(port=int(os.environ.get('PORT', 5000)), debug=False)
